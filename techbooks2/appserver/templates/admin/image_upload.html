@@ -1,0 +1,121 @@
+{% load staticfiles %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="월간 못보던거">
+    <meta name="author" content="Kim Sungwoo">
+    <title>월간 못보던거</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/webfont.css' %}" rel="stylesheet">
+    <link href="{% static 'css/admin/image_uploader.css' %}" rel="stylesheet">
+</head>
+<body>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script>
+    var is_thumbnail;
+    var is_image = target_label === 'gif' || target_label === 'image' || target_label === 'image_button' || is_thumbnail === true;
+    $(document).ready(function() {
+      var fileurl = parent_target.val();
+      if (is_image){
+        $("#preview_image").attr('src', fileurl).attr('style','');
+        $('#image_input').attr("accept","image/gif, image/jpg, image/jpeg, image/png");
+        console.log('image');
+      }
+      else {
+        $("#preview_video").attr('style','').attr('src', fileurl);
+        $('#image_input').attr("accept","video/*");
+        console.log('video');
+      }
+    });
+
+    function readURL(input) {
+      //var label = parent_target.parents().eq(1).prev().val();
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          if (is_image){
+            $('#preview_image').attr('src', e.target.result).attr('style','');
+          }
+          else {
+            $("#preview_video").attr('style','').attr('src', e.target.result);
+          }
+        }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $(document).on("change","#image_input",function(){
+        readURL(this);
+      });
+
+      $(document).on("click", ".image_upload_button", function(){
+        var parent = $(this).parent();
+        $("#image_info_edition",parent).val(opener.document.getElementById("id_edition").value);
+        $("#image_info_category",parent).val(opener.document.getElementById("id_category").value);
+        $("#image_info_label",parent).val(target_label);
+        $("#progress-bar-holder").css('display','block');
+        var formData = new FormData(parent[0]);
+        $.ajax({
+          method: "POST",
+          url: "/techbook/admin/article/image_upload/",
+          processData: false,
+          contentType: false,
+          data: formData,
+          xhr        : function ()
+                {
+                    var jqXHR = null;
+                    if ( window.ActiveXObject )
+                    {
+                        jqXHR = new window.ActiveXObject( "Microsoft.XMLHTTP" );
+                    }
+                    else
+                    {
+                        jqXHR = new window.XMLHttpRequest();
+                    }
+                    //Upload progress
+                    jqXHR.upload.addEventListener( "progress", function ( evt )
+                    {
+                        if ( evt.lengthComputable )
+                        {
+                            var percent = Math.round( (evt.loaded * 100) / evt.total );
+                            console.log(percent);
+                            $("#progress-bar").css('width', percent * 0.9 + "%");
+                        }
+                    }, false );
+                    return jqXHR;
+                },
+          success: function(result) {
+            parent_target.val(result['url']);
+            window.close();
+          }
+        });
+      });
+  </script>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <form method="post" enctype="multipart/form-data">
+          <input type="file" name="image" id="image_input">
+          <input type="text" name="edition" id="image_info_edition" style="display:none">
+          <input type="text" name="category" id="image_info_category" style="display:none">
+          <input type="text" name="label" id="image_info_label" style="display:none">
+          <input type="button" class="image_upload_button btn btn-primary" value="upload">
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <img id="preview_image" src="#" alt="your image" style="display:none"/>
+      <video id="preview_video" preload="auto" controls autoplay style="display:none" type="video/mp4"/></video>
+    </div>
+  </div>
+  <div id="progress-bar-holder">
+    <div id="progress-bar">
+      <p id="progress-percent"> Uploading.. </p>
+    </div>
+  </div>
+</body>
+</html>

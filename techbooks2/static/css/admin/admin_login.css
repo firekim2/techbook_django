@@ -1,0 +1,49 @@
+.content-container{
+  background-color: rgba(0,0,0,0.6);
+  width: 400px;
+  padding: 10px 40px 10px 40px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position:relative;
+  border-radius:8px;
+  animation: fade-in .1s 1s linear both;
+}
+
+.container{
+  width:100%;
+  height:100%;
+}
+
+body{
+  background-color: #111;
+  background-image: url(/media/common_usage/background.gif);
+  background-size: cover;
+  background-position: 50% 50%;
+  transition: opacity .2s linear;
+  color: #fff;
+}
+
+.sign-in-form{
+  position: relative;
+}
+
+h2, h3{
+  text-align: center;
+}
+
+h3{
+  font-family: INNODAOOM-LIGHT;
+  font-size: 1em;
+  margin-top : 3px;
+}
+
+.epic_fail{
+  display:none;
+}
+
+#epic_fail{
+  position:fixed;
+  bottom: 50px;
+  right: 60px;
+}

@@ -1,0 +1,15 @@
+FROM python:3.6
+ENV PYTHONUNBUFFERED 1
+MAINTAINER Sungwoo Kim
+RUN mkdir /config
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y python-numpy
+RUN apt-get install -y python3-dev
+RUN apt-get install -y python-django
+RUN apt-get install -y libgdal-dev g++
+RUN apt-get install -y vim git
+ADD /requirements.txt /config/
+RUN pip install --default-timeout=1000 numpy
+RUN pip install --default-timeout=1000 -r /config/requirements.txt
+WORKDIR /src

@@ -1,0 +1,4 @@
+FROM postgres:latest
+MAINTAINER Sungwoo Kim
+RUN apt-get update
+RUN apt-get upgrade -y

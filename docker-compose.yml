@@ -1,0 +1,47 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: ng01
+    ports:
+      - "80:8000"
+    volumes:
+      - ./techbooks2:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+  db:
+    build:
+      context: ./config
+      dockerfile: Dockerfile-db
+    container_name: ps01
+    ports:
+      - "5432"
+    environment:
+      - DEBUG=false
+      - POSTGRES_DB=techbooks2
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=adminadmin
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    volumes:
+      - ./techbook_db:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -h localhost -p 5432 -q -U postgres"
+      interval: 3s
+      timeout: 1s
+      retries: 10
+  web:
+    build:
+      context: ./config
+      dockerfile: Dockerfile-web
+    container_name: dg01
+    #command: bash -c "gunicorn -b 0.0.0.0:8000 --reload techbooks2.wsgi --reload-extra-file /src/appserver/templates/admin"
+    command: bash -c "./manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./techbooks2:/src
+    expose:
+      - "8000"
+volumes:
+  testserver:

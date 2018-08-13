@@ -1,0 +1,30 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 아티클 관측실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_main.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admin/admin_webviewer.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content%}
+
+<div class="slideshow-container">
+  {% for article in articles %}
+    <p id="article{{ forloop.counter0 }}" class="article" style="display:none;">{{article}}</p>
+    <div class="mySlides" style="background-image:url(/media/common_usage/iphone.png);">
+      <div class="preview_box fade" id="preview_box{{forloop.counter0}}" style="background:#fff;">
+      </div>
+      <div class="btn-edition"><p id="btn-article-editor-{{ forloop.counter0 }}">수정하기</p></div>
+    </div>
+  {% endfor %}
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'js/admin/admin_main.js' %}"></script>
+<script src="{% static 'js/admin/admin_article_preview.js' %}"></script>
+<script src="{% static 'js/admin/admin_webviewer.js' %}"></script>
+{% endblock %}

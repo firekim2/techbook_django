@@ -1,0 +1,40 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 버전 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_message.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<script>
+function slide(obj){
+  let target = obj.lastElementChild.classList;
+  if(target.contains("closed")){
+    target.remove("closed");
+  }
+  else{
+    target.add("closed");
+  }
+}
+</script>
+<div class="message-container">
+  {% for message in unchecked %}
+    <a href="javascript:void(0)" onclick="slide(this)">
+      <p class="unchecked"> {{message}} </p>
+      <div class="slider closed">
+        <p>{{message.message|linebreaks}}<p>
+      </div>
+    </a>
+  {% endfor %}
+  {% for message in checked %}
+    <a href="javascript:void(0)" onclick="slide(this)"><p class="chcked"> {{message}} </p></a>
+    <div class="slider closed">
+      <p>{{message.message|linebreaks}}<p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

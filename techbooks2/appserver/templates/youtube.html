@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<body>
+<script type="text/javascript">
+  let app_scheme = "vnd.youtube://www.youtube.com/watch?v={{video_address}}";
+  let app_store_url = "https://itunes.apple.com/us/app/youtube/id544007664";
+  let google_store_url = "https://play.google.com/store/apps/details?id=com.google.android.youtube";
+  var isMobile = {
+    Android: function() {
+        return /Android/i.test(navigator.userAgent);
+    },
+    iOS: function() {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.iOS());
+    }
+  };
+  window.location = app_scheme;
+  let now = Date.now();
+  let delay_check = 200;
+  let delay = 100;
+  setTimeout(function() {
+    let delay_measured = Date.now() - now ;
+    if (isMobile.iOS()) {
+      window.location.href = app_store_url;
+    }
+    else {
+      window.location = google_store_url;
+    }
+  }, delay);
+</script>
+</body>
+</html>

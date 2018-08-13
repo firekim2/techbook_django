@@ -1,0 +1,71 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 에디션 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_edition.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="form-container">
+  <form method="POST" class="post-form" enctype="multipart/form-data">
+    <div id="btn-floating">
+      <button type="submit" class="save btn btn-danger">Save</button>
+    </div>
+    <table class="basic-info-table">
+      <tr>
+        <td>
+          <label for="{{ form.publish.id_for_label }}">Publish</label>
+        </td>
+        <td>
+          {{ form.publish }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.year.id_for_label }}">Year</label>
+        </td>
+        <td>
+          {{ form.year }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.month.id_for_label }}">Month</label>
+        </td>
+        <td>
+          {{ form.month }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.edition.id_for_label }}">Edition</label>
+        </td>
+        <td>
+          {{ form.edition }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.calender.id_for_label }}">Calender</label>
+        </td>
+        <td>
+          {{ form.calender }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.img.id_for_label }}">Cover</label>
+        </td>
+        <td>
+          {{ form.img }}
+        </td>
+      </tr>
+    </table>
+    <img src="{{ url }}">
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

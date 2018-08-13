@@ -1,0 +1,89 @@
+{% load staticfiles %}
+
+<html lang='ko'>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="월간 못보던거">
+  <meta name="author" content="Kim Sungwoo">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/webfont.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admin/admin_base.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <script type="text/javascript" src="{% static 'js/admin/admin_base.js' %}"></script>
+  <header>
+    <div class="nav-top">
+      <div class="nav-top-inner">
+        <ul class="usermenu float-l">
+          <li class="usermenu-item">
+            <a href="/techbook/admin/main/" class="user-item-btn">홈으로</a>
+          </li>
+          <li class="divider"></li>
+          <li class="usermenu-item">
+            <a href="/techbook/admin/version/" class="user-item-btn">버전 관리</a>
+          </li>
+          <li class="divider"></li>
+          <li class="usermenu-item">
+            <a href="javascript:alert('와서 물어보셈여 ;;')" class="user-item-btn">개발자 문의하기</a>
+          </li>
+        </ul>
+        <ul class="usermenu float-r">
+         <li class="usermenu-item">
+            <a href="/techbook/admin/message/" class="user-item-btn">메시지</a>
+         </li>
+         <li class="divider"></li>
+         <li class="usermenu-item">
+            <a href="{% url 'logout' %}" class="user-item-btn">로그아웃</a>
+         </li>
+          <li class="usermenu-dropdown" id="usermenu-dropdown">
+            <a href='javascript:void(0)' class="dropdown-toggle dropdwon-box-btn" data-toggle="dropdown" onclick="open_menu(this);">
+                <i class="fas fa-plus"></i>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu flat right">
+                <li>
+                    <a href="/techbook/admin/notice/">공지사항 관리</a>
+                </li>
+                <li>
+                    <a href="#">게스트 계정 관리</a>
+                </li>
+                <li>
+                    <hr class="no-margin">
+                </li>
+                <li>
+                    <a href="/techbook/admin/edition/new/">에디션 추가</a>
+                </li>
+
+                <li>
+                    <a href="/techbook/admin/article/new/">아티클 추가</a>
+                </li>
+            </ul>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="col-md-12 vertical-center">
+      {% if user.is_active %}
+      <div class="content-holder">
+        {% block content %}
+        {% endblock %}
+      </div>
+      {% else %}
+       <script>
+        window.location.href="/techbook/admin/";
+       </script>
+      {% endif %}
+    </div>
+  </div>
+  {% block scripts %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  {% endblock %}
+</body>
+</html>

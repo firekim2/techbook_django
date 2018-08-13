@@ -1,0 +1,97 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 아티클 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_webviewer.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admin/admin_article.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content%}
+<div id="preset_page" style="display:none">
+  <div class="preset_page_btn">
+    <button type="button" class="btn btn-default btn-page-remove" onclick="var parent = $(this).parent().parent().attr('id'); window[parent].removePage();window[parent] = null;"> 페이지 삭제 </button>
+  </div>
+  <div class="btn-content-append" onclick="window[$(this).parent().attr('id')].addContent()">
+    <p>콘텐츠 추가</p>
+  </div>
+</div>
+<div id="preset_content" style="display:none">
+    <div class="preset_content_btn">
+      <button type="button" class="btn btn-default btn-content-remove" onclick="$(this).parent().parent().remove()"> 콘텐츠 삭제 </button>
+    </div>
+    <select name="label" class="labels">
+    </select>
+</div>
+
+<div class="article-container">
+  <div class="preview_box_article" id="preview_box">
+  </div>
+  <div class="row row-editor-title">
+    <h2>월간 못보던거 에디터</h2>
+  </div>
+  <div class="row row-article-info">
+    <form method="POST" class="post-form">
+      <div id="btn-floating">
+        <button type="button" class="btn btn-success" onclick="to_json()"> 미리보기 </button>
+        <button type="submit" class="save btn btn-danger" onclick="to_json()">Save</button>
+      </div>
+      <table class="basic-info-table">
+        <tr>
+          <td>
+            <label for="{{ form.guest.id_for_label }}">Guest</label>
+          </td>
+          <td>
+            {{ form.guest }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="{{ form.edition.id_for_label }}">Edition</label>
+          </td>
+          <td>
+            {{ form.edition }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="{{ form.category.id_for_label }}">Category</label>
+          </td>
+          <td>
+            {{ form.category }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="{{ form.title.id_for_label }}">Title</label>
+          </td>
+          <td>
+            {{ form.title }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="{{ form.tag.id_for_label }}">Tag</label>
+          </td>
+          <td>
+            {{ form.tag }}
+          </td>
+        </tr>
+      </table>
+      {{ form.content }}
+    </form>
+    <div id="field" class="row">
+      <p>Contents</p>
+      <div class="btn-page-append" onclick="add_page()">
+        <p>페이지 추가</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/admin/admin_article_preview.js' %}"></script>
+<script src="{% static 'js/admin/admin_article.js' %}"></script>
+{% endblock %}

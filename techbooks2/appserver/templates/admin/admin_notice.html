@@ -1,0 +1,46 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 에디션 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_edition.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="form-container">
+  <form method="POST" class="post-form" enctype="multipart/form-data">
+    <div id="btn-floating">
+      <button type="submit" class="save btn btn-danger">Save</button>
+    </div>
+    <table class="basic-info-table">
+      <tr>
+        <td>
+          <label for="{{ form.publish_date.id_for_label }}">Publish Date</label>
+        </td>
+        <td>
+          {{ form.publish_date }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.expire_date.id_for_label }}">Expire Date</label>
+        </td>
+        <td>
+          {{ form.expire_date }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.content.id_for_label }}">Notice</label>
+        </td>
+        <td>
+          {{ form.content }}
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

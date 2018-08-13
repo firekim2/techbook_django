@@ -1,0 +1,35 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_main.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content%}
+<div class="slideshow-container">
+  {% for edition in editions.edition_info %}
+    <div class="mySlides" style="background-image:url(/media/common_usage/iphone.png);">
+      <div class="edition-cover-img fade" style="background-image:url({{edition.edition_cover}});" onclick="location.href='/techbook/admin/webviewer/{{edition.edition_number}}/'">
+        <div class="dummy_menu" style="background-image:url(/media/common_usage/bt_menu.png);left: 14px">
+        </div>
+        <div class="dummy_menu" style="background-image:url(/media/common_usage/bt_search.png);right: 14px;">
+        </div>
+        <div class="article_info">
+          {% for article_info in edition.article_info %}
+            <h3>{{article_info.article_category}}</h3>
+            <p>{{article_info.article_title}}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="btn-edition"><p onclick="location.href='/techbook/admin/edition/{{edition.edition_number}}'">수정하기</p></div>
+    </div>
+  {% endfor %}
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+  <script src="{% static 'js/admin/admin_main.js' %}"></script>
+{% endblock %}

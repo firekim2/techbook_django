@@ -1,0 +1,38 @@
+{% extends 'admin/admin_base.html' %}
+{% load staticfiles %}
+
+{% block title %}못보던 관리실 - 버전 관리실{% endblock %}
+{% block extra_head %}
+  <link href="{% static 'css/admin/admin_edition.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="form-container">
+  <form method="POST" class="post-form">
+    <div id="btn-floating">
+      <button type="submit" class="save btn btn-danger">Save</button>
+    </div>
+    <table class="basic-info-table">
+      <tr>
+        <td>
+          <label for="{{ form.version_a.id_for_label }}">Android</label>
+        </td>
+        <td>
+          {{ form.version_a }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="{{ form.version_i.id_for_label }}">IOS</label>
+        </td>
+        <td>
+          {{ form.version_i }}
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

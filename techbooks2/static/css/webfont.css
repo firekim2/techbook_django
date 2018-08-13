@@ -1,0 +1,33 @@
+
+@font-face {
+    font-family: INNODAOOM-BOLD;
+    src: local(INNODAOOM-BOLD),
+         url('../font/INNODAOOM-BOLD.woff') format('woff'),
+         url('../font/INNODAOOM-BOLD.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: INNODAOOM-MEDIUM;
+    src: local(INNODAOOM-MEDIUM),
+         url('../font/INNODAOOM-MEDIUM.woff') format('woff'),
+         url('../font/INNODAOOM-MEDIUM.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: INNODAOOM-LIGHT;
+    src: local(INNODAOOM-LIGHT),
+         url('../font/INNODAOOM-LIGHT.woff') format('woff'),
+         url('../font/INNODAOOM-LIGHT.ttf') format('truetype');
+}
+
+body{
+  font-family: INNODAOOM-LIGHT;
+}
+
+h1, h2{
+  font-family: INNODAOOM-BOLD;
+}
+
+h3{
+  font-family: INNODAOOM-MEDIUM;
+}

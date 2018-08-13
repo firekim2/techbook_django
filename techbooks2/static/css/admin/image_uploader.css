@@ -1,0 +1,44 @@
+.image_upload_button{
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    z-index:900;
+}
+
+#preview_image{
+  width:100%;
+}
+
+#preview_video{
+  width: 100%;
+}
+
+#progress-bar-holder{
+  position: fixed;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-color: #ffffff;
+  height: 8%;
+  width:84%;
+  border-radius: 5px;
+  z-index:901;
+  display: none;
+  text-align: center;
+}
+
+#progress-bar{
+  position: fixed;
+  transform: translate(5%, -50%);
+  left: 0%;
+  top: 50%;
+  width: 0%;
+  background-color: #5076B0;
+  height: 80%;
+  border-radius: 5px;
+  z-index:902;
+}
+
+#progress-percent{
+  color:#ffffff;
+}

@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<html lang='ko'>
+<head>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/webfont.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admin/admin_login.css' %}" rel="stylesheet">
+</head>
+<body>
+  <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+  <div class="container">
+    <div class="epic_fail" id="epic_fail">
+      <input type="button" class="save btn btn-default epic_fail" value="관리자 지원하기">
+    </div>
+    <div class="content-container">
+      {% if user.is_active %}
+        <script>
+          window.location.href="/techbook/admin/main/";
+        </script>
+       {% else %}
+       {% if form.errors %}
+        <p>관계자 외 출입금지라능.</p>
+       {% endif %}
+         <form method="POST" action="{% url 'admin_login' %}" class="sign-in-form">
+          <h2 class="sub-title"> 못보던 관리사무소 </h2>
+          <h3 class="epic_fail"> 관리자 외 출입 금지. </h3>
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">ID</label>
+            <input class="form-control" id="username" maxlength="15" name="username" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="password">PW</label>
+            <input class="form-control" id="password" maxlength="120" name="password" type="password" />
+          </div>
+          <input type="submit" class="save btn btn-default" value="로그인">
+          <input type="hidden" name="next" value="">
+         </form>
+         <script>
+          if ( "{{epic_fail}}" == "True"){
+            $(".epic_fail").css('display','block');
+          }
+         </script>
+      {%  endif %}
+    </div>
+  </div>
+</body>
+</html>

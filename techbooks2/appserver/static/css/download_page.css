@@ -1,0 +1,171 @@
+html,
+body {
+  background: url(../../media/common_usage/download_image_back.jpg) no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+p {
+  font-family: INNODAOOM-LIGHT;
+}
+
+a p {
+  margin : 0;
+}
+h3 {
+    margin-top: 10px;
+    margin-bottom: 0;
+    color : #fff;
+    font-family: INNODAOOM-BOLD;
+}
+
+h4{
+  margin:2px;
+  color: #fff;
+  font-family: INNODAOOM-LIGHT;
+}
+
+ul {
+    margin-top: 15px;
+    padding-left: 20px;
+    font-size: 0.9em;
+    color: #e5e1e3;
+    font-weight: normal;
+    font-family: INNODAOOM-LIGHT;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.wrapper {
+    display: table;
+    width: 100%;
+    min-height: 100%;
+}
+
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    padding: 15px;
+}
+
+.app-download-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-left {
+    width:90%;
+    margin-left:5%;
+}
+.btn-right {
+    width:90%;
+    margin-left:5%;
+}
+
+.btn-platform {
+    font-weight: bold;
+    color: #eee;
+}
+
+.title{
+  margin-bottom : 30px;
+  text-shadow: 1px 1px 3px #000;
+}
+.app-title{
+
+    margin-bottom : 5px;
+    text-align:center;
+  }
+
+.app-download {
+    margin-bottom: 30px;
+    text-align: center;
+    padding-top:
+}
+
+.app-description p {
+    margin-top : 10px;
+    margin-bottom : 0px;
+    color : #fff;
+    text-align:center;
+}
+
+.app-description li {
+  padding-bottom: 6px;
+}
+
+.y-mid{
+  transform: translate(0, -50%);
+  top: 50%;
+  position: absolute;
+  z-index:999;
+}
+
+.billboard{
+  position: fixed;
+  bottom:0px;
+  right:0px;
+  width:fit-content;
+  height:fit-content;
+  z-index: 0;
+}
+
+.billboard img{
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px){
+  body{
+    background-position: -500px;
+  }
+  .billboard{
+    position: fixed;
+    bottom:0px;
+    right:-30px;
+    width:fit-content;
+    height:fit-content;
+    z-index: 0;
+  }
+  .title{
+    position: relative;
+    margin-top: 150px;
+    margin-bottom: 80px;
+  }
+  .app-download{
+    margin:0;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;
+  }
+  .app-description{
+    margin:0;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;
+    padding-top: 100px;
+  }
+  .y-mid{
+    transform: translate(0, 0);
+    position: relative;
+    z-index:999;
+  }
+}
+@media (max-width: 992px){
+
+
+
+}
+@media (max-width: 1200px){
+
+
+
+}
+@media (min-width: 1200px){
+
+
+
+}
